@@ -1,0 +1,13 @@
+<suite name="SmartTrackerAppiumProject">
+
+    <test name="SmartTrackerPage">
+
+        <classes>
+
+            <class name="tests.SmartTrackerTest"/>
+
+        </classes>
+
+    </test>
+
+</suite>
