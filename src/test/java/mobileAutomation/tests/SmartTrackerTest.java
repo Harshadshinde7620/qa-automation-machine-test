@@ -1,24 +1,64 @@
 package mobileAutomation.tests;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-public class SmartTrackerTest {
+import mobileAutomation.base.BaseTest;
+import mobileAutomation.pages.SmartTrackerPage;
 
-    public By startTrackingButton =
-            By.xpath("//android.widget.Button[@text='Start Tracking Service']");
+public class SmartTrackerTest extends BaseTest {
 
-    public By stopTrackingButton =
-            By.xpath("//android.widget.Button[@text='Stop Tracking Service']");
+    SmartTrackerPage page = new SmartTrackerPage();
 
-    public By allowWhileUsingAppButton =
-            By.xpath("//android.widget.Button[contains(@text,'While using')]");
+    @Test
+    public void validateLocationTrackingFlow() {
 
-    public By preciseLocationToggle =
-            By.id("com.android.permissioncontroller:id/permission_location_accuracy_radio_fine");
+        // Click Start Tracking Service button
+        driver.findElement(page.startTrackingButton).click();
 
-    public By locationUpdateLog =
-            By.xpath("//*[contains(@text,'Location Update')]");
+        System.out.println("Clicked Start Tracking Service button");
 
-    public By latLngLog =
-            By.xpath("//*[contains(@text,'Lat:') and contains(@text,'Lng:')]");
+        // Handle precise location option if displayed
+        try {
+
+            driver.findElement(page.preciseLocationToggle).click();
+
+            System.out.println("Precise location selected");
+
+        } catch (Exception e) {
+
+            System.out.println("Precise location option not displayed");
+        }
+
+        // Click While Using App permission
+        driver.findElement(page.allowWhileUsingAppButton).click();
+
+        System.out.println("Location permission granted");
+
+        // Verify Stop Tracking Service button
+        WebElement stopButton =
+                driver.findElement(page.stopTrackingButton);
+
+        Assert.assertTrue(stopButton.isDisplayed(),
+                "Stop Tracking Service button not displayed");
+
+        System.out.println("Tracking service started successfully");
+
+        // Verify Location Update log
+        WebElement locationLog =
+                driver.findElement(page.locationUpdateLog);
+
+        Assert.assertTrue(locationLog.isDisplayed(),
+                "Location Update log not displayed");
+
+        // Verify Latitude and Longitude
+        String coordinates =
+                driver.findElement(page.latLngLog).getText();
+
+        Assert.assertTrue(coordinates.contains("Lat:"));
+        Assert.assertTrue(coordinates.contains("Lng:"));
+
+        System.out.println("Location logs validated successfully");
+    }
 }

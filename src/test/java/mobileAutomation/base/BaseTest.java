@@ -24,10 +24,10 @@
 	        caps.setCapability("automationName", "UiAutomator2");
 
 	        caps.setCapability("appPackage",
-	                "com.example.smartlocationtackingapp");
+	                "com.example.smartlocationtrackingapp");
 
 	        caps.setCapability("appActivity",
-	                "com.example.smartlocationtackingapp.MainActivity");
+	                "com.example.smartlocationtrackingapp.MainActivity");
 
 	        driver = new AndroidDriver(
 	                new URL("http://127.0.0.1:4723/wd/hub"),
