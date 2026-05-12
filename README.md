@@ -113,7 +113,7 @@ The framework demonstrates how API setup steps can be chained before UI validati
 The Appium framework demonstrates automation logic for a native Android application named:
 
 ```text
-com.example.smartlocationtackingapp
+com.example.smartlocationtrackingapp
 ```
 
 ## Automated Flow Covered
