@@ -9,6 +9,7 @@
 	import org.testng.annotations.BeforeClass;
 
 	import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 
 	public class BaseTest {
 
@@ -17,26 +18,24 @@
 	    @BeforeClass
 	    public void setup() throws MalformedURLException {
 
-	        DesiredCapabilities caps = new DesiredCapabilities();
+	    	UiAutomator2Options options = new UiAutomator2Options();
 
-	        caps.setCapability("platformName", "Android");
-	        caps.setCapability("deviceName", "Android Emulator");
-	        caps.setCapability("automationName", "UiAutomator2");
+	    	options.setPlatformName("Android");
+	    	options.setDeviceName("Pixel 6");
+	    	options.setAutomationName("UiAutomator2");
 
-	        caps.setCapability("appPackage",
-	                "com.example.smartlocationtrackingapp");
+	    	options.setApp("/Users/xenneotech/Downloads/location-app.apk");
 
-	        caps.setCapability("appActivity",
-	                "com.example.smartlocationtrackingapp.MainActivity");
+	    	options.setAppPackage("com.example.smartlocationtackingapp");
 
-	        driver = new AndroidDriver(
-	                new URL("http://127.0.0.1:4723/wd/hub"),
-	                caps);
+	    	options.setAppActivity(
+	    	    "com.example.smartlocationtackingapp.ui.MainActivity"
+	    	);
 
-	        driver.manage().timeouts()
-	                .implicitlyWait(Duration.ofSeconds(10));
-
-	        System.out.println("Application launched successfully");
+	    	driver = new AndroidDriver(
+	    	        new URL("http://127.0.0.1:4723"),
+	    	        options
+	    	);
 	    }
 
 	    @AfterClass
